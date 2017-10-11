@@ -2,10 +2,11 @@ package services.model
 
 import java.util.UUID
 
-import play.api.libs.json.{Format, Json}
+import org.joda.time.DateTime
 
-case class Tag(id: UUID, name: String)
-
-object Tag {
-  implicit val tagFormat: Format[Tag] = Json.format[Tag]
-}
+/**
+ * Created by v723840 on 10/11/17.
+ */
+case class Tag (id: UUID = UUID.randomUUID(),
+          name: String,
+      	  createdAt: DateTime = new DateTime)

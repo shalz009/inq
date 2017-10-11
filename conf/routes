@@ -18,3 +18,5 @@ POST    /v1/author                  controllers.AuthorController.create(name: St
 POST /v1/question                   controllers.QuestionController.create()
 
 GET     /v1/question/:id        controllers.QuestionController.get(id:java.util.UUID)
+
+POST	/v1/tag					controllers.TagController.createTag(name: String)
