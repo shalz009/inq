@@ -20,5 +20,8 @@ case class Question(id: UUID,
 
 object Question {
   def apply(id: UUID, values: Map[String, Any]): Question =
-    Question(id, UUID.fromString(values("authorID").toString), values("body").toString, Set.empty, new DateTime(values("createdAt")))
+  Question(id, UUID.fromString(values("authorID").toString), values("body").toString, Set.empty, new DateTime(values("createdAt")))
+
+  def apply(body: String): Question =
+    Question(UUID.randomUUID(), UUID.randomUUID(), body, Set.empty[Tag], new DateTime())
 }
