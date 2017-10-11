@@ -1,4 +1,4 @@
-package services.com.inq
+package services.model
 
 import java.util.UUID
 
@@ -12,4 +12,4 @@ case class Question (
                     authorId : UUID,
                     body: String,
                     tags: Set[Tag],
-                    createdAt: DateTime)
+                    createdAt: DateTime = new DateTime())
