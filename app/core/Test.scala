@@ -11,11 +11,14 @@ import services.model.Author
 
 object Test {
   def main(args: Array[String]) {
-    val input = Question(UUID.randomUUID(), UUID.randomUUID(), "Who are you?", Set.empty, new DateTime())
+    val qid = UUID.randomUUID()
+    val input = Question(qid, UUID.randomUUID(), "Who are you?", Set.empty, new DateTime())
+    println(s"input = $input")
     ESBase.insert(input)
-    ESBase.updateSingle(input.copy(body = "Updated Body"))
-    println("here!")
-    
+    val result = Question.apply(qid, ESBase.lookup(qid, "question"))
+    println(s"result = $result")
+    ESBase.updateSingle(result.copy(body = "Updated Body"))
+
     /*
      * Delete Question by ID
      */

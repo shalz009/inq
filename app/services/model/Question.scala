@@ -5,7 +5,7 @@ import java.util.UUID
 import core.ESEntity
 import org.joda.time.DateTime
 
-case class Question(id: UUID = UUID.randomUUID(),
+case class Question(id: UUID,
                     authorId: UUID,
                     body: String,
                     tags: Set[Tag],
@@ -16,4 +16,9 @@ case class Question(id: UUID = UUID.randomUUID(),
   override def fieldsAsMap: Map[String, Any] = {
     Map("authorID" -> authorId, "body" -> body, "createdAt" -> createdAt.getMillis)
   }
+}
+
+object Question {
+  def apply(id: UUID, values: Map[String, Any]): Question =
+    Question(id, UUID.fromString(values("authorID").toString), values("body").toString, Set.empty, new DateTime(values("createdAt")))
 }
