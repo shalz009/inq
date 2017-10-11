@@ -19,6 +19,12 @@ object ESBase {
     }
   }.await
 
+  def deleteByID(id: UUID, estype: String) = {
+    client.execute {
+      delete(id).from(("inq", estype))
+    }
+  }.await
+
 
 //  val result = client.execute {
 //    search("myindex").matchQuery("capital", "ulaanbaatar")
