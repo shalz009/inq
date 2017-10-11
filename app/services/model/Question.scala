@@ -2,14 +2,18 @@ package services.model
 
 import java.util.UUID
 
+import core.ESEntity
 import org.joda.time.DateTime
 
-/**
- * Created by v723840 on 10/11/17.
- */
-case class Question (
-                    id: UUID = UUID.randomUUID(),
-                    authorId : UUID,
+case class Question(id: UUID = UUID.randomUUID(),
+                    authorId: UUID,
                     body: String,
                     tags: Set[Tag],
-                    createdAt: DateTime = new DateTime())
+                    createdAt: DateTime = new DateTime()) extends ESEntity {
+
+  override def estype = "question"
+
+  override def fieldsAsMap: Map[String, Any] = {
+    Map("authorID" -> authorId, "body" -> body, "createdAt" -> createdAt.getMillis)
+  }
+}
