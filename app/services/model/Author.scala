@@ -1,4 +1,4 @@
-package services.com.inq
+package services.model
 
 import org.joda.time.DateTime
 import java.util.UUID
