@@ -14,4 +14,4 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 
 # Create an Author
-POST    /v1/author                  controllers.AuthorSvc.create(name: String)
+POST    /v1/author                  controllers.AuthorController.create(name: String)
