@@ -19,6 +19,20 @@ object ESBase {
     }
   }.await
 
+  def deleteByID(id: UUID, estype: String) = {
+    client.execute {
+      delete(id).from(("inq", estype))
+    }
+  }.await
+
+
+  def updateSingle[A <: ESEntity](a:A) = client.execute{
+    update(a.id).in("inq"/a.estype).doc(
+      a.fieldsAsMap
+    )
+  }.await
+
+
 
 //  val result = client.execute {
 //    search("myindex").matchQuery("capital", "ulaanbaatar")
