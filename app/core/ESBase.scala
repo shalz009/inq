@@ -20,6 +20,14 @@ object ESBase {
   }.await
 
 
+  def updateSingle[A <: ESEntity](a:A) = client.execute{
+    update(a.id).in("inq"/a.estype).doc(
+      a.fieldsAsMap
+    )
+  }.await
+
+
+
 //  val result = client.execute {
 //    search("myindex").matchQuery("capital", "ulaanbaatar")
 //  }.await
