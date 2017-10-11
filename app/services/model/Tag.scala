@@ -2,9 +2,10 @@ package services.model
 
 import java.util.UUID
 
-/**
- * Created by v723840 on 10/11/17.
- */
-class Tag (
-          id: UUID = UUID.randomUUID(),
-          name: String)
+import play.api.libs.json.{Format, Json}
+
+case class Tag(id: UUID, name: String)
+
+object Tag {
+  implicit val tagFormat: Format[Tag] = Json.format[Tag]
+}

@@ -11,3 +11,10 @@ GET     /message                    controllers.AsyncController.message
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
+# Create an Author
+POST    /v1/author                  controllers.AuthorController.create(name: String)
+
+POST /v1/question                   controllers.QuestionController.create()
+
+GET     /v1/question/:id        controllers.QuestionController.get(id:java.util.UUID)
