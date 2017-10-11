@@ -1,8 +1,10 @@
 package services.model
 
-/**
- * Created by v723840 on 10/11/17.
- */
-class Author {
+import org.joda.time.DateTime
+import java.util.UUID
 
-}
+case class Author (
+                  id : UUID = UUID.randomUUID(),
+                  name : String,
+                  createdAt : DateTime = new DateTime()
+                  )
