@@ -2,20 +2,17 @@ package logic
 
 import java.util.UUID
 
-import services.model.Question
+import core.ESBase
+import services.model.{Question, QuestionRequest}
 
 import scala.concurrent.Future
 
 object QuestionHandler {
 
-  def create(q: Question): Future[UUID] = {
+  def create(qr: QuestionRequest): Future[UUID] = {
+    val q = Question(qr.body)
 
-    println(s"id : ${q.id}")
-    println(s"authorId : ${q.authorId}")
-    println(s"body : ${q.body}")
-
+    ESBase.insert(q)
     Future.successful(q.id)
-
   }
-
 }

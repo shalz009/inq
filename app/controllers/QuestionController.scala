@@ -6,7 +6,7 @@ import javax.inject.Singleton
 import core.ESBase
 import play.api.libs.json.Json
 import play.api.mvc._
-import services.model.Question
+import services.model.{Question, QuestionRequest}
 
 import scala.concurrent.ExecutionContext.Implicits.global
 
@@ -15,9 +15,8 @@ class QuestionController extends Controller {
 
   def create() = Action.async(BodyParsers.parse.json) {
     implicit request =>
-      val body = request.body
-      val question = Question(body.toString())
-      logic.QuestionHandler.create(question) map { a =>
+      val body = request.body.as[QuestionRequest]
+      logic.QuestionHandler.create(body) map { a =>
         Created(a.toString)
       }
   }
