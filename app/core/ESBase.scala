@@ -10,28 +10,36 @@ import org.elasticsearch.action.support.WriteRequest.RefreshPolicy
 object ESBase {
 
   import com.sksamuel.elastic4s.http.ElasticDsl._
+
   val client = HttpClient(ElasticsearchClientUri("localhost", 9200))
 
 
-  def insert[A <: ESEntity](a:A) = {
+  def insert[A <: ESEntity](a: A) = {
     client.execute {
       indexInto("inq" / a.estype).id(a.id).fields(a.fieldsAsMap)
-    }
-  }.await
+    }.await
+  }
 
   def deleteByID(id: UUID, estype: String) = {
     client.execute {
       delete(id).from(("inq", estype))
-    }
-  }.await
+    }.await
+  }
 
 
-  def updateSingle[A <: ESEntity](a:A) = client.execute{
-    update(a.id).in("inq"/a.estype).doc(
-      a.fieldsAsMap
-    )
-  }.await
+  def updateSingle[A <: ESEntity](a:A) = {
+    client.execute{
+      update(a.id).in("inq"/a.estype).doc(
+        a.fieldsAsMap
+      )
+    }.await
+  }
 
+  def lookup(id:UUID, estype:String) = {
+    client.execute {
+      get(id).from("inq", estype)
+    }.await.source
+  }
 
 
 //  val result = client.execute {
@@ -43,8 +51,8 @@ object ESBase {
 //    search("")
 //  }
   // prints out the original json
-//  println(result.hits.head.sourceAsString)
+  //  println(result.hits.head.sourceAsString)
 
-//  client.close()
+  //  client.close()
 
 }

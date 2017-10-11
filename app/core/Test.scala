@@ -11,9 +11,13 @@ import services.model.Author
 
 object Test {
   def main(args: Array[String]) {
-    ESBase.insert(Question(UUID.randomUUID(), UUID.randomUUID(), "Who are you?", Set.empty, new DateTime()))
-    ESBase.updateSingle(Question(UUID.fromString("4ca8feac-0cae-4c23-b762-66618e509859"),UUID.fromString("65bd81c2-ef85-4e71-b8f0-d76126a0f308"), "Iam",Set.empty,new DateTime()))
-    println("here!")
+    val qid = UUID.randomUUID()
+    val input = Question(qid, UUID.randomUUID(), "Who are you?", Set.empty, new DateTime())
+    println(s"input = $input")
+    ESBase.insert(input)
+    val result = Question.apply(qid, ESBase.lookup(qid, "question"))
+    println(s"result = $result")
+    ESBase.updateSingle(result.copy(body = "Updated Body"))
 
     /*
      * Delete Question by ID
