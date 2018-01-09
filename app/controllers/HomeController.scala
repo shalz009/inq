@@ -1,14 +1,19 @@
 package controllers
 
-import javax.inject._
-import play.api._
-import play.api.mvc._
+import javax.inject.Inject
+
+import play.api.mvc.{Action, Controller}
+
+//
+//import javax.inject._
+//import play.api._
+//import play.api.mvc._
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
  * application's home page.
  */
-@Singleton
+//@Singleton
 class HomeController @Inject() extends Controller {
 
   /**
@@ -18,7 +23,7 @@ class HomeController @Inject() extends Controller {
    * a path of `/`.
    */
   def index = Action {
-    Ok(views.html.index("Your new application is ready."))
+    Ok("Your new application is ready.")
   }
 
 }

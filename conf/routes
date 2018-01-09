@@ -12,11 +12,30 @@ GET     /message                    controllers.AsyncController.message
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
+
 # Create an Author
-POST    /v1/author                  controllers.AuthorController.create(name: String)
+#POST    /v1/author                  controllers.AuthorController.create(name: String)
 
-POST /v1/question                   controllers.QuestionController.create()
+#POST /v1/question                   controllers.QuestionController.create()
 
-GET     /v1/question/:id        controllers.QuestionController.get(id:java.util.UUID)
+#GET     /v1/question/:id        controllers.QuestionController.get(id:java.util.UUID)
 
-POST	/v1/tag					controllers.TagController.createTag(name: String)
+#POST	/v1/tag					controllers.TagController.createTag(name: String)
+
+
+
+#ask a question
+POST   /v1/question                services.Engine.createQuestion
+
+#list all new questions, which have no answers
+GET    /v1/question/new            services.Engine.listNewQuestions
+
+#get specific question
+GET    /v1/question/questionId     services.Engine.getQuestion
+
+#answer a question = create an answer
+POST   /v1/answer                  services.Engine.createAnswer
+
+#get answers for a question
+GET   /v1/answer/:id               services.Engine.getAnswers
+
